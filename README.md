@@ -1,7 +1,7 @@
 # Install Elasticsearch, Logstash and Kibana (Elastic Stack) on Ubuntu 18.01
 ## Prerequisites
-- An Ubuntu 18.04 server
-Set up by following our Initial Server Setup Guide for Ubuntu 18.04, including a non-root user with sudo privileges and a firewall configured with ufw. The amount of CPU, RAM, and storage that your Elastic Stack server will require depends on the volume of logs that you intend to gather. For this tutorial, we will be using a VPS with the following specifications for our Elastic Stack server:
+- Ubuntu 18.04 server
+  Set up by following our Initial Server Setup Guide for Ubuntu 18.04, including a non-root user with sudo privileges and a firewall configured with ufw. The amount of CPU, RAM, and storage that your Elastic Stack server will require depends on the volume of logs that you intend to gather. For this tutorial, we will be using a VPS with the following specifications for our Elastic Stack server:
   - OS: Ubuntu 18.04
   - RAM: 4GB
   - CPU: 2

@@ -57,7 +57,18 @@ Allow trafix on port 80:
   $ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
   $curl -4 icanhazip.com
   ```
-
+4. Managing the Nginx Process
+Basic management commands:
+  ```
+  $sudo systemctl stop nginx
+  $sudo systemctl start nginx
+  $sudo systemctl restart nginx
+  $sudo systemctl reload nginx
+  $sudo systemctl disable nginx
+  $sudo systemctl enable nginx
+  ```
+5. More Information
+Refer to https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
 
 ## Elastic-Installation
 Elasticsearch is a distributed RESTful search engine.The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.

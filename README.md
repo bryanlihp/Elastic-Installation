@@ -113,6 +113,7 @@ Elasticsearch is a distributed RESTful search engine.The easist way to install E
 ## Kibana
 Kibana is an Elasticsearch web interface for searching and visualizing logs.
 According to the official documentation, you should install Kibana only after installing Elasticsearch. Installing in this order ensures that the components each product depends on are correctly in place.
+1. Install Kibana
 Because you've already added the Elastic package source in the previous step, you can just install the remaining components of the Elastic Stack using apt:
   ```
   $sudo apt install kibana
@@ -122,9 +123,28 @@ Then enable and start the Kibana service:
   $sudo systemctl enable kibana
   $sudo systemctl start kibana
   ```
-
+2. Setup a reverse proxy
+Because Kibana is configured to only listen on localhost, we must set up a reverse proxy(Nginx) to allow external access to it. 
+  1. Create an Nginx administrative Kibana user
+```
+    $echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
+```
+  2. Create a Nginx block file
+```
+    $sudo nano /etc/nginx/sites-available/example.com
+```
+  ... Refer to https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-18-04
+    
 ## Logstash
 Logstash is the data processing component of the Elastic Stack which sends incoming data to Elasticsearch.
+1. Install
+  ```
+  $sudo apt install logstash
+  ```
+2. Config
+
+  
+
 ## Beats
 ## Microsoft SQL Server installation
 1. Import the public repository GPG keys:

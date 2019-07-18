@@ -108,9 +108,21 @@ Elasticsearch is a distributed RESTful search engine.The easist way to install E
   ```
   $sudo nano /etc/elasticsearch/elasticsearch.yml
   ```
+## Kibana
+Kibana is an Elasticsearch web interface for searching and visualizing logs.
+According to the official documentation, you should install Kibana only after installing Elasticsearch. Installing in this order ensures that the components each product depends on are correctly in place.
+Because you've already added the Elastic package source in the previous step, you can just install the remaining components of the Elastic Stack using apt:
+  ```
+  $sudo apt install kibana
+  ```
+Then enable and start the Kibana service:
+  ```
+  $sudo systemctl enable kibana
+  $sudo systemctl start kibana
+  ```
+
 ## Logstash
 Logstash is the data processing component of the Elastic Stack which sends incoming data to Elasticsearch.
-## Kibana
 ## Beats
 ## Microsoft SQL Server installation
 1. Import the public repository GPG keys:

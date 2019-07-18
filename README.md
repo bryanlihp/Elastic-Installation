@@ -53,4 +53,25 @@ The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb
 ## Microsoft SQL Server installation
 1. Import the public repository GPG keys:
   ```
+  $wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
   ```
+2. Register the Microsoft SQL Server Ubuntu repository
+  ```
+  $sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/16.04/mssql-server-2017.list)"
+  ```
+3. Install SQL Server package
+  ```
+  $sudo apt-get update
+  $sudo apt-get install -y mssql-server
+  ``` 
+4.Setup SQL Server 
+  ```
+  $sudo /opt/mssql/bin/mssql-conf setup
+  ```
+  Verify that SQL Server is running:
+  ```
+  $systemctl status mssql-server --no-pager
+  ```
+5.
+
+

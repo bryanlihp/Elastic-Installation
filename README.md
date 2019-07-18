@@ -24,32 +24,40 @@ Required as a reverse proxy for Kibana.
 Nginx is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the internet. It is more resource-friendly than Apache in most cases and can be used as a web server or reverse proxy.
 1. Installing Nginx
 Nginx is available in Ubuntu's defaul repository,it is possible to install it from these repositories using the apt packaging system.
-```
-$sudo apt update
-$sudo apt install nginx
-```
+  ```
+  $sudo apt update
+  $sudo apt install nginx
+  ```
 2. Adjust the Firewall
 Before testing Nginx, the firewall software needs to be adjusted to allow access to the service. Nginx registers itself as a service with ufw upon installation, making it straightforward to allow Nginx access.
 List the application configurations that ufw knows how to work with by typing:
-```
-$sudo ufw app list
-```
+  ```
+  $sudo ufw app list
+  ```
 output:
-```
-Available applications:
-  Nginx Full
-  Nginx HTTP
-  Nginx HTTPS
-  OpenSSH
-```
+  ```
+  Available applications:
+    Nginx Full
+    Nginx HTTP
+    Nginx HTTPS
+    OpenSSH
+  ```
 There are three options avaliable for Nginx
   - Nginx Full: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)
   - Nginx HTTP: This profile opens only port 80 (normal, unencrypted web traffic)
   - Nginx HTTPS: This profile opens only port 443 (TLS/SSL encrypted traffic)
 Allow trafix on port 80:
-```
+  ```
   $sudo ufw allow 'Nginx HTTP'
-```
+  $sudo ufw status
+  ```
+3.Check the web server
+  ```
+  $systemctl status nginx
+  $ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+  $curl -4 icanhazip.com
+  ```
+
 
 ## Elastic-Installation
 Elasticsearch is a distributed RESTful search engine.The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.

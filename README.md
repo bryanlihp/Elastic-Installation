@@ -1,12 +1,12 @@
 # Install Elasticsearch, Logstash and Kibana (Elastic Stack) on Ubuntu 18.01
 ## Prerequisites
-. An Ubuntu 18.04 server set up by following our Initial Server Setup Guide for Ubuntu 18.04, including a non-root user with sudo privileges and a firewall configured with ufw. The amount of CPU, RAM, and storage that your Elastic Stack server will require depends on the volume of logs that you intend to gather. For this tutorial, we will be using a VPS with the following specifications for our Elastic Stack server:
-
-.OS: Ubuntu 18.04
-.RAM: 4GB
-.CPU: 2
-.Java 8 — which is required by Elasticsearch and Logstash — installed on your server. Note that Java 9 is not supported. To install this, follow the "Installing the Oracle JDK" section of our guide on how to install Java 8 on Ubuntu 18.04.
-.Nginx installed on your server, which we will configure later in this guide as a reverse proxy for Kibana. Follow our guide on How to Install Nginx on Ubuntu 18.04 to set this up.
+- An Ubuntu 18.04 server
+Set up by following our Initial Server Setup Guide for Ubuntu 18.04, including a non-root user with sudo privileges and a firewall configured with ufw. The amount of CPU, RAM, and storage that your Elastic Stack server will require depends on the volume of logs that you intend to gather. For this tutorial, we will be using a VPS with the following specifications for our Elastic Stack server:
+  - OS: Ubuntu 18.04
+  - RAM: 4GB
+  - CPU: 2
+- Java 8 — which is required by Elasticsearch and Logstash — installed on your server. Note that Java 9 is not supported. To install this, follow the "Installing the Oracle JDK" section of our guide on how to install Java 8 on Ubuntu 18.04.
+- Nginx installed on your server, which we will configure later in this guide as a reverse proxy for Kibana. Follow our guide on How to Install Nginx on Ubuntu 18.04 to set this up.
 ## Elastic-Installation
 Elasticsearch is a distributed RESTful search engine.The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.
 1. Update package:

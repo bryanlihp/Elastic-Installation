@@ -1,21 +1,11 @@
 # Install Elasticsearch, Logstash and Kibana (Elastic Stack) on Ubuntu 18.01
 ## Prerequisites
 - Ubuntu 18.04 server
-  Set up by following our Initial Server Setup Guide for Ubuntu 18.04, including a non-root user with sudo privileges and a firewall configured with ufw. The amount of CPU, RAM, and storage that your Elastic Stack server will require depends on the volume of logs that you intend to gather. For this tutorial, we will be using a VPS with the following specifications for our Elastic Stack server:
   - OS: Ubuntu 18.04
   - RAM: 4GB
   - CPU: 2
-- Java 8 — which is required by Elasticsearch and Logstash — installed on your server. Note that Java 9 is not supported. To install this, follow the "Installing the Oracle JDK" section of our guide on how to install Java 8 on Ubuntu 18.04.
-- Nginx installed on your server, which we will configure later in this guide as a reverse proxy for Kibana. Follow our guide on How to Install Nginx on Ubuntu 18.04 to set this up.
-## Elastic-Installation
-Elasticsearch is a distributed RESTful search engine.The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.
-1. Update package:
-  apt-transport-https is necessary to access a repository over HTTPS
-  ```
-  $sudo apt-update 
-  $sudo apt install apt-transport-https
-  ```
-2. Install OpenJDK 8:
+## Java 8
+Required by Elasticsearch and Logstash. Note that Java 9 is not supported.
   ```
   $sudo apt install openjdk-8-jdk
   ```
@@ -29,7 +19,47 @@ Elasticsearch is a distributed RESTful search engine.The easist way to install E
   OpenJDK Runtime Environment (build 1.8.0_191-8u191-b12-2ubuntu0.18.04.1-b12)
   OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
   ```
-3. Add Elasticsearch repository
+## Nginx
+Required as a reverse proxy for Kibana.
+Nginx is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the internet. It is more resource-friendly than Apache in most cases and can be used as a web server or reverse proxy.
+1. Installing Nginx
+Nginx is available in Ubuntu's defaul repository,it is possible to install it from these repositories using the apt packaging system.
+```
+$sudo apt update
+$sudo apt install nginx
+```
+2. Adjust the Firewall
+Before testing Nginx, the firewall software needs to be adjusted to allow access to the service. Nginx registers itself as a service with ufw upon installation, making it straightforward to allow Nginx access.
+List the application configurations that ufw knows how to work with by typing:
+```
+$sudo ufw app list
+```
+output:
+```
+Available applications:
+  Nginx Full
+  Nginx HTTP
+  Nginx HTTPS
+  OpenSSH
+```
+There are three options avaliable for Nginx
+  - Nginx Full: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)
+  - Nginx HTTP: This profile opens only port 80 (normal, unencrypted web traffic)
+  - Nginx HTTPS: This profile opens only port 443 (TLS/SSL encrypted traffic)
+Allow trafix on port 80:
+```
+  $sudo ufw allow 'Nginx HTTP'
+```
+
+## Elastic-Installation
+Elasticsearch is a distributed RESTful search engine.The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.
+1. Update package:
+  apt-transport-https is necessary to access a repository over HTTPS
+  ```
+  $sudo apt-update 
+  $sudo apt install apt-transport-https
+  ```
+2. Add Elasticsearch repository
   Import the repository's GPG using the following wget command:
   ```
   $wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -38,14 +68,14 @@ Elasticsearch is a distributed RESTful search engine.The easist way to install E
   ```
   $sudo sh -c 'echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" > /etc/apt/sources.list.d/elastic-7.x.list'
   ```
-4. Update package and install
+3. Update package and install
   Once the repository is enabled, update the apt package list and install the Elasticsearch engine:
   ```
   $sudo apt update
   $sudo apt install elasticsearch
   
   ```
-5. Enable the service and run
+4. Enable the service and run
   Elasticsearch service will not start automatically. Use the following command to enable and run the service:
   ```
   $sudo systemctl enable elasticsearch.service
@@ -61,7 +91,6 @@ Elasticsearch is a distributed RESTful search engine.The easist way to install E
   ```
 ## Logstash
 Logstash is the data processing component of the Elastic Stack which sends incoming data to Elasticsearch.
-
 ## Kibana
 ## Beats
 ## Microsoft SQL Server installation
@@ -86,6 +115,11 @@ Logstash is the data processing component of the Elastic Stack which sends incom
   ```
   $systemctl status mssql-server --no-pager
   ```
-5.
+5.Firewall
+Enabling port SQL Server TCP port 1434 on the firewall is required for connecting remotely:
+  ```
+  $ufw enable 1433
+  ```
+In addition to TCP 1433 for SQL Server, you may need to enable TCP 1434 for the Dedicated Administrator Connection (DAC). These are default ports.
 
 

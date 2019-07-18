@@ -1,6 +1,6 @@
 # Install Elasticsearch, Logstash and Kibana (Elastic Stack) on Ubuntu 18.01
 ## Elastic-Installation
-The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.
+Elasticsearch is a distributed RESTful search engine.The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.
 1. Update package:
   apt-transport-https is necessary to access a repository over HTTPS
   ```

@@ -108,6 +108,8 @@ Elasticsearch is a distributed RESTful search engine.The easist way to install E
   ```
   $sudo nano /etc/elasticsearch/elasticsearch.yml
   ```
+  Note that when setting network.host to 0.0.0.0 (production use), cluster.initial_master_nodes must be set accordingly.
+  
 ## Kibana
 Kibana is an Elasticsearch web interface for searching and visualizing logs.
 According to the official documentation, you should install Kibana only after installing Elasticsearch. Installing in this order ensures that the components each product depends on are correctly in place.

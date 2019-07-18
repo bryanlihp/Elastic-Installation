@@ -2,9 +2,10 @@
 ## Elastic-Installation
 The easist way to install Elasticsearch on Ubuntu 18.04 is by installing the deb package from official Elasticsearch repository.
 1. Update package:
+  apt-transport-https is necessary to access a repository over HTTPS
   ```
   $sudo apt-update 
-  $sudo apt install apt-transport-https   ** This is necessary to access a repository over HTTPS
+  $sudo apt install apt-transport-https
   ```
 2. Install OpenJDK 8:
   ```

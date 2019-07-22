@@ -175,4 +175,5 @@ Enabling port SQL Server TCP port 1434 on the firewall is required for connectin
   ```
 In addition to TCP 1433 for SQL Server, you may need to enable TCP 1434 for the Dedicated Administrator Connection (DAC). These are default ports.
 
+## SQL Server Elasticsearch Integration
 

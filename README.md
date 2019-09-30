@@ -171,9 +171,39 @@ Logstash is the data processing component of the Elastic Stack which sends incom
 5.Firewall
 Enabling port SQL Server TCP port 1434 on the firewall is required for connecting remotely:
   ```
-  $ufw enable 1433
+  $sudo ufw enable
+  $sudo ufw allow 1433
   ```
 In addition to TCP 1433 for SQL Server, you may need to enable TCP 1434 for the Dedicated Administrator Connection (DAC). These are default ports.
+
+patch:
+Reverting to 14.0.3192.2-2 helps.
+
+But it's possible to solve the problem also using the method indicated by Ola774, not only in case of upgrade from Ubuntu 16.04 to 18.04, but on every installation of SQL Server 2017 on Ubuntu 18.04.
+
+It seems that Microsoft now in cu16 messed up with their own patch for the ssl-version problems applied in cu10 (https://techcommunity.microsoft.com/t5/SQL-Server/Installing-SQL-Server-2017-for-Linux-on-Ubuntu-18-04-LTS/ba-p/385983). But linking the ssl 1.0.0 libraries works.
+
+So just do the following:
+
+Stop SQL Server
+
+sudo systemctl stop mssql-server 
+Open the editor for the service configuration by
+
+sudo systemctl edit mssql-server 
+This will create an override for the original service config. It's correct that the override-file, or, more exactly "drop-in-file", is empty when used the first time.
+
+In the editor, add the following lines to the file and save it:
+
+[Service]
+Environment="LD_LIBRARY_PATH=/opt/mssql/lib" 
+Create symbolic links to OpenSSL 1.0 for SQL Server to use:
+
+sudo ln -s /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0 /opt/mssql/lib/libssl.so 
+sudo ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /opt/mssql/lib/libcrypto.so 
+Start SQL Server sudo systemctl start mssql-server
+
+
 
 ## SQL Server Elasticsearch Integration
 
